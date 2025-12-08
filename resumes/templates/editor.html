@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock %}
+
+{% block content %}
+<div class="editor-layout">
+
+  <!-- ================= LEFT: EDITOR FORM ================= -->
+  <div class="editor-form glass">
+    <h2>{% if resume %}Edit Resume{% else %}New Resume{% endif %}</h2>
+
+    <form method="post" id="resume-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <!-- Title & Template -->
+      <div class="field-grid">
+        <div class="field">
+          <label>Title</label>
+          {{ form.title }}
+        </div>
+        <div class="field">
+          <label>Template</label>
+          {{ form.template }}
+        </div>
+      </div>
+
+      <!-- Personal Details -->
+      <h3>Personal Details</h3>
+      <div class="field-grid">
+        <div class="field">
+          <label>Full Name</label>
+          {{ form.full_name }}
+        </div>
+        <div class="field">
+          <label>Email</label>
+          {{ form.email }}
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          {{ form.phone }}
+        </div>
+        <div class="field">
+          <label>Location</label>
+          {{ form.location }}
+        </div>
+        <div class="field">
+          <label>Job Title</label>
+          {{ form.job_title }}
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <h3>Summary</h3>
+      <div class="field with-button">
+        {{ form.summary }}
+        {% if resume %}
+        <button type="button" class="btn-chip" id="ai-summary-btn" data-resume="{{ resume.id }}">
+          AI Summary
+        </button>
+        {% endif %}
+      </div>
+
+      <!-- Skills -->
+      <h3>Skills</h3>
+      <div class="field with-button">
+        {{ form.skills }}
+        {% if resume %}
+        <button type="button" class="btn-chip" id="ai-keywords-btn" data-resume="{{ resume.id }}">
+          ATS Keywords
+        </button>
+        {% endif %}
+      </div>
+
+      <!-- Experience -->
+      <h3>Experience</h3>
+      <div class="field with-button">
+        {{ form.experience }}
+        {% if resume %}
+        <button type="button" class="btn-chip" id="ai-experience-btn" data-resume="{{ resume.id }}">
+          Improve
+        </button>
+        {% endif %}
+      </div>
+
+      <!-- Education -->
+      <h3>Education</h3>
+      <div class="field">
+        {{ form.education }}
+      </div>
+
+      <!-- ✅✅✅ PROJECTS (FIXED) -->
+      <h3>Projects</h3>
+      <div class="field">
+        {{ form.projects }}
+      </div>
+
+      <!-- ✅✅✅ CERTIFICATIONS (FIXED) -->
+      <h3>Certifications</h3>
+      <div class="field">
+        {{ form.certifications }}
+      </div>
+
+      <!-- Actions -->
+      <div class="action-row">
+        <button type="submit" class="btn-primary">Save</button>
+
+        {% if resume %}
+        <a href="{% url 'resume_pdf' resume.id %}" class="btn-outline">
+          Download PDF
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="autosave-status" id="autosave-status">Auto-saved</div>
+    </form>
+  </div>
+
+  <!-- ================= RIGHT: LIVE PREVIEW ================= -->
+  <div class="editor-preview glass">
+    <h3>Live Preview</h3>
+    <p class="muted">Save to see the PDF version.</p>
+
+    <p><strong>{{ form.full_name.value }}</strong></p>
+    <p>{{ form.job_title.value }}</p>
+
+    <hr>
+
+    <h4>Summary</h4>
+    <p>{{ form.summary.value }}</p>
+
+    <h4>Education</h4>
+    <p>{{ form.education.value }}</p>
+
+    <h4>Skills</h4>
+    <p>{{ form.skills.value }}</p>
+
+    <h4>Experience</h4>
+    <p>{{ form.experience.value }}</p>
+
+    <h4>Projects</h4>
+    <p>{{ form.projects.value }}</p>
+
+    <h4>Certifications</h4>
+    <p>{{ form.certifications.value }}</p>
+  </div>
+
+</div>
+{% endblock %}

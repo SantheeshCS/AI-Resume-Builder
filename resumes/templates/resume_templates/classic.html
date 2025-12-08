@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: "Times New Roman", serif; margin: 40px; font-size: 13px; }
+        h1 { font-size: 26px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { font-size: 16px; margin-top: 18px; border-bottom: 1px solid #000; }
+        .contact { margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>{{ resume.full_name }}</h1>
+    <div class="contact">
+        {{ resume.email }} | {{ resume.phone }} | {{ resume.location }}
+    </div>
+    <div class="contact">
+        {{ resume.job_title }}
+    </div>
+
+    <h2>Summary</h2>
+    <p>{{ resume.summary|linebreaksbr }}</p>
+
+    <h2>Skills</h2>
+    <p>{{ resume.skills|linebreaksbr }}</p>
+
+    <h2>Experience</h2>
+    <p>{{ resume.experience|linebreaksbr }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education|linebreaksbr }}</p>
+</body>
+</html>

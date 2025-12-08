@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ resume.full_name }} - Resume</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        color: #222;
+      }
+      h1,
+      h2 {
+        margin-bottom: 6px;
+      }
+      h2 {
+        border-bottom: 1px solid #ccc;
+      }
+      p {
+        white-space: pre-line;
+      }
+
+      /* ✅ Hide buttons when printing */
+      @media print {
+        .no-print {
+          display: none;
+        }
+        body {
+          margin: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="no-print">
+      <button onclick="window.print()">Download PDF</button>
+    </div>
+
+    <h1>{{ resume.full_name }}</h1>
+    <p><strong>{{ resume.job_title }}</strong></p>
+
+    <h2>Summary</h2>
+    <p>{{ resume.summary }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+
+    <h2>Skills</h2>
+    <p>{{ resume.skills }}</p>
+
+    <h2>Experience</h2>
+    <p>{{ resume.experience }}</p>
+
+    <h2>Projects</h2>
+    <p>{{ resume.projects }}</p>
+
+    <h2>Certifications</h2>
+    <p>{{ resume.certifications }}</p>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>Your Resumes</h2>
+    <a href="{% url 'resume_new' %}" class="btn-primary">+ New Resume</a>
+
+    <form
+      method="post"
+      action="{% url 'resumes_delete_all' %}"
+      onsubmit="return confirm('Delete ALL resumes? This cannot be undone!');"
+    >
+      {% csrf_token %}
+      <button class="btn-danger-outline">Delete All</button>
+    </form>
+  </div>
+
+  {% if resumes %}
+  <div class="resume-grid">
+    {% for r in resumes %}
+    <div class="resume-card glass">
+      <h3>{{ r.title }}</h3>
+      <p class="muted">
+        {{ r.job_title }} | Updated: {{ r.updated|date:"d M Y H:i" }}
+      </p>
+      <p>{{ r.summary|truncatechars:120 }}</p>
+      <div class="card-actions">
+        <a href="{% url 'editor' r.id %}" class="btn btn-outline">Edit</a>
+        <a href="{% url 'resume_pdf' r.id %}" class="btn btn-outline"
+          >Download PDF</a
+        >
+        <form method="post" action="{% url 'resume_delete' r.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No resumes yet. Create your first one.</p>
+  {% endif %}
+</div>
+{% endblock %}

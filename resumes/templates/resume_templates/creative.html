@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: "Poppins", sans-serif; margin: 30px; background: #f4f7ff; }
+        .card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        h1 { margin: 0; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #eef; font-size: 11px; }
+        h2 { font-size: 16px; margin-top: 18px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>{{ resume.full_name }}</h1>
+    <div class="badge">{{ resume.job_title }}</div>
+    <p>{{ resume.email }} | {{ resume.phone }} | {{ resume.location }}</p>
+
+    <h2>About Me</h2>
+    <p>{{ resume.summary|linebreaksbr }}</p>
+
+    <h2>Skills</h2>
+    <p>{{ resume.skills|linebreaksbr }}</p>
+
+    <h2>Experience</h2>
+    <p>{{ resume.experience|linebreaksbr }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education|linebreaksbr }}</p>
+</div>
+</body>
+</html>

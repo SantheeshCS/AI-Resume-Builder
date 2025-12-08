@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container glass">
+    <h2>Login</h2>
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="field">
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+        <button class="btn-primary" type="submit">Login</button>
+        <p class="muted">No account? <a href="{% url 'register' %}">Register</a></p>
+    </form>
+</div>
+{% endblock %}
